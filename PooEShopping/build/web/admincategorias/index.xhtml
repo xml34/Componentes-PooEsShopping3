@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Tienda Virtual</title>
+    </h:head>
+    <h:body>
+        <ui:include src="../general/header.xhtml" />
+        <h2>Administrar Categorías</h2>
+        <h:form>
+            <h:dataTable value="#{index.categorias}" var="cat">
+                <h:column>
+                    <f:facet name = "header">ID</f:facet>
+                    #{cat.id}
+                </h:column>
+                <h:column>
+                    <f:facet name = "header">Nombre</f:facet>
+                    #{cat.nombre}
+                </h:column>
+                <h:column>
+                    <f:facet name = "header">Descripción</f:facet>
+                    #{cat.descripcion}
+                </h:column>
+                <h:column>
+                    <f:facet name = "header">Modificar</f:facet>
+                    <h:button value="Modificar" outcome="modificar?id=#{cat.id}" />
+                </h:column>
+                <h:column>
+                    <f:facet name = "header">Eliminar</f:facet>
+                    <h:commandButton value="Eliminar" title="Eliminar" onclick="if (!confirm('¿Está seguro de que desea suprimir la categoría seleccionada?')) return false" action="#{index.eliminarCategoria}"> 
+                        <f:setPropertyActionListener value="#{cat}" target="#{index.categoriaEliminar}" />
+                    </h:commandButton>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+        <h:button value="Agregar Nueva Categoría" outcome="agregar" />
+        <ui:include src="../general/footer.xhtml" />
+    </h:body>
+</html>
